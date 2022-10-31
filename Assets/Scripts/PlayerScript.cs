@@ -83,11 +83,12 @@ public class PlayerScript : MonoBehaviour
                 scoreButtonText.text = "Bananas encontradas: " + bananas;
                 Destroy(other.gameObject);
                 pointButton.gameObject.SetActive(true);
-                Invoke("HidePointButton", 1.0f);
+                Invoke("HidePointButton", 2.0f);
                 break;
             case "Finish":
                 if (bananas > PlayerPrefs.GetInt("Bananas"))
                     PlayerPrefs.SetInt("Bananas", bananas);
+                PlayerPrefs.SetInt("Rating", bananas);
                 SceneManager.LoadScene("WinScreen");
                 break;
         }

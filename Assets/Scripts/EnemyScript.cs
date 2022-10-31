@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    private float enemySpeed = 40.0f;
+    private float enemySpeed = 35.0f;
 
     // Start is called before the first frame update
     void Start()

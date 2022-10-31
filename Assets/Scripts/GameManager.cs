@@ -8,8 +8,10 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public Button startButton;
+
     public TextMeshProUGUI startButtonText;
     public TextMeshProUGUI scoreButtonText;
+    public TextMeshProUGUI ratingButtonText;
     public TextMeshProUGUI startLevelText;
 
     public AudioClip startSound;
@@ -33,6 +35,8 @@ public class GameManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == "StartScreen")
             SetHighScoreText();
+        if (SceneManager.GetActiveScene().name == "WinScreen")
+            ratingButtonText.text = SetRatingText();
     }
 
     // Update is called once per frame
@@ -102,6 +106,42 @@ public class GameManager : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("Bananas") > 0)
             scoreButtonText.text = "HScore: " + PlayerPrefs.GetInt("Bananas");
+    }
+
+    public string SetRatingText()
+    {
+        int rating = PlayerPrefs.GetInt("Rating");
+
+        if (rating <= 3)
+        {
+            return "Calificación: F";
+        }
+        else if (rating <= 6)
+        {
+            return "Calificación: E";
+        }
+        else if (rating <= 9)
+        {
+            return "Calificación: D";
+        }
+        else if (rating <= 12)
+        {
+            return "Calificación: C";
+        }
+        else if (rating <= 15)
+        {
+            return "Calificación: B";
+        }
+        else if (rating <= 18)
+        {
+            return "Calificación: A";
+        }
+        else if (rating >= 19)
+        {
+            return "Calificación: S";
+        }
+
+        return "";
     }
 
     public void ResetButtonSound()
