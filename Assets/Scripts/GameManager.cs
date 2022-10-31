@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public Button startButton;
     public TextMeshProUGUI startButtonText;
     public TextMeshProUGUI scoreButtonText;
+    public TextMeshProUGUI startLevelText;
 
     public AudioClip startSound;
     public AudioClip resetSound;
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Level1")
         {
             Cursor.visible = false;
+            Time.timeScale = 0.0f;
         }
         else
         {
@@ -38,6 +40,18 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
+        if (Input.GetKeyDown(KeyCode.Space) && SceneManager.GetActiveScene().name == "Level1" && startLevelText.enabled)
+        {
+            Time.timeScale = 1.0f;
+            startLevelText.text = "¡El juego ha comenzado!";
+            StartCoroutine(StartLevelTextVanish());
+        }
+    }
+
+    private IEnumerator StartLevelTextVanish()
+    {
+        yield return new WaitForSeconds(1.0f);
+        startLevelText.enabled = false;
     }
 
     public void LoadScene(string sceneName)
