@@ -20,6 +20,8 @@ public class PlayerScript : MonoBehaviour
     public TMP_Text A_Input;
     public TMP_Text D_Input;
 
+    public AudioClip[] picking;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -76,6 +78,7 @@ public class PlayerScript : MonoBehaviour
                 SceneManager.LoadScene("LoseScreen");
                 break;
             case "Banana":
+                GetComponent<AudioSource>().PlayOneShot(picking[Random.Range(0, picking.Length)]);
                 bananas++;
                 scoreButtonText.text = "Bananas encontradas: " + bananas;
                 Destroy(other.gameObject);
