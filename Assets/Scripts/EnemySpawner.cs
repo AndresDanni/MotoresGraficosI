@@ -30,7 +30,7 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator SpawnAnimals()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(3.0f);
         while (true)
         {
             if (GameObject.Find("Player").transform.position.z <= 320.0f && (GameObject.Find("Player").transform.position.x <= 22.0f && GameObject.Find("Player").transform.position.x >= -23.0f))

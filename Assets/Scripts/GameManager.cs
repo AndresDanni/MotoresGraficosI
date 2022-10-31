@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator StartLevelTextVanish()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(2.0f);
         startLevelText.enabled = false;
     }
 
