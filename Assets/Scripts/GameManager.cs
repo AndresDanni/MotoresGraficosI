@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public AudioClip startSound;
     public AudioClip resetSound;
     public AudioClip buttonSound;
+    public AudioClip playerSpawnSound;
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && SceneManager.GetActiveScene().name == "Level1" && startLevelText.enabled)
         {
             Time.timeScale = 1.0f;
+            GetComponent<AudioSource>().PlayOneShot(playerSpawnSound);
             startLevelText.text = "¡El juego ha comenzado!";
             StartCoroutine(StartLevelTextVanish());
         }
@@ -89,6 +91,8 @@ public class GameManager : MonoBehaviour
         startButtonText.text = "2";
         yield return new WaitForSeconds(1.0f);
         startButtonText.text = "1";
+        yield return new WaitForSeconds(1.0f);
+        startButtonText.text = "cargando...";
         SceneManager.LoadScene("Level1");
     }
 

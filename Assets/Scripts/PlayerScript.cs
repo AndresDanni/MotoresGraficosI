@@ -20,6 +20,8 @@ public class PlayerScript : MonoBehaviour
     public TMP_Text A_Input;
     public TMP_Text D_Input;
 
+    public Transform vehicle;
+
     public AudioClip[] picking;
 
     // Start is called before the first frame update
@@ -37,7 +39,7 @@ public class PlayerScript : MonoBehaviour
 
         if (Input.GetButton("Vertical") || Input.GetButton("Horizontal"))
         {
-            playerRb.AddForce((Vector3.forward * WS_Input * speed * Time.deltaTime) + (Vector3.right * AD_Input * speed * Time.deltaTime), ForceMode.Force);
+            playerRb.AddRelativeForce((Vector3.forward * WS_Input * speed * Time.deltaTime) + (Vector3.right * AD_Input * speed * Time.deltaTime), ForceMode.Force);
             playerRb.velocity = Vector3.ClampMagnitude(playerRb.velocity, 8.0f);
         }
         else
@@ -85,6 +87,9 @@ public class PlayerScript : MonoBehaviour
                 pointButton.gameObject.SetActive(true);
                 Invoke("HidePointButton", 2.0f);
                 break;
+            case "Look":
+                this.transform.LookAt(vehicle);
+                break;
             case "Finish":
                 if (bananas > PlayerPrefs.GetInt("Bananas"))
                     PlayerPrefs.SetInt("Bananas", bananas);
@@ -92,6 +97,12 @@ public class PlayerScript : MonoBehaviour
                 SceneManager.LoadScene("WinScreen");
                 break;
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.transform.tag == "Look")
+            this.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
     }
 
     private void HidePointButton()

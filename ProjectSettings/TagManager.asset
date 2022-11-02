@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Banana
   - Animal
+  - Look
   layers:
   - Default
   - TransparentFX
